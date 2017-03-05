@@ -10,6 +10,9 @@
 
 #include <iostream>
 #include <set>
+#include <stdlib.h>
+#include <time.h>
+#include "Error.hpp"
 
 
 /*

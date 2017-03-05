@@ -7,9 +7,7 @@
 
 
 #include "Card.hpp"
-#include <stdlib.h>
-#include <time.h>
-#include "Error.hpp"
+
 
 
 
@@ -61,6 +59,10 @@ Card::Card(const std::set<Card>& forbidden_cards)
 
 		// Pull random suit number [1,4]
 		msuit = rand() % 4 + 1;
+
+		//std::cout << (*this) << " Card Constructor\n";
+		//std::cout << (forbidden_cards.find(*this) != forbidden_cards.end()) << "\n";
+		//std::cout << forbidden_cards.size() << "\t"<< "\n";
 	}
 }
 
@@ -140,9 +142,13 @@ void Card::PullRandom(const std::set<Card>& forbidden_cards)
 // working
 bool Card::operator< (const Card& right_card) const
 {
-	if (mrank >= right_card.mrank)
+	if (mrank > right_card.mrank)
 	{
 		return false;
+	}
+	else if (mrank < right_card.mrank)
+	{
+		return true;
 	}
 	else
 	{
@@ -155,13 +161,14 @@ bool Card::operator< (const Card& right_card) const
 			return true;
 		}
 	}
+
 }
 
 
 
 std::ostream& operator<< (std::ostream &out, const Card& card_to_print)
 {
-	out << "(" << card_to_print.mrank << "," << card_to_print.msuit << ")";
+	out << "(" << (card_to_print.mrank>=10) << (card_to_print.mrank%10) << "," << card_to_print.msuit << ")";
 	return out;
 }
 

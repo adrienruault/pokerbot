@@ -24,7 +24,9 @@ Hand::Hand()
 
 // Constructor that initializes a hand with two cards pulled randomly. It accounts
 // for the list of forbidden cards provided as input.
-Hand::Hand(const std::set& forbidden_cards)
+// Note that the set of forbidden cards is passed by reference and is modified
+// according to the cards that are pulled to serve the hand
+Hand::Hand(std::set<Card>& forbidden_cards)
 {
 	// Pulling the first card of the hand
 	Card card1(forbidden_cards);
@@ -35,10 +37,34 @@ Hand::Hand(const std::set& forbidden_cards)
 	// Pulling the second card
 	Card card2(forbidden_cards);
 
+	// Adding the last pulled card to the forbidden set of cards
+	forbidden_cards.insert(card2);
+
 	mhand.push_back(card1);
 	mhand.push_back(card2);
 }
 
+
+
+// Redistribute 2 new cards to the hand, accounting for the forbidden set of cards
+// that is provided as input.
+void Hand::PullRandom(std::set<Card>& forbidden_cards)
+{
+	// Pulling the first card of the hand
+	Card card1(forbidden_cards);
+
+	// Adding the last pulled card to the forbidden set of cards
+	forbidden_cards.insert(card1);
+
+	// Pulling the second card
+	Card card2(forbidden_cards);
+
+	// Adding the last pulled card to the forbidden set of cards
+	forbidden_cards.insert(card2);
+
+	mhand[0]=card1;
+	mhand[1]=card2;
+}
 
 
 // Print a hand of 2 cards using the following formalism:

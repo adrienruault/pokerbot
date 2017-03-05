@@ -21,6 +21,8 @@
  *	The suit assigned to the card is not allowed, out of the interval [1,4]
  *	random_card1 is: (~4,~2)
  *	random_card2 is: (~10,~3)
+ *	The rank average is: 6.99843
+ *	The suit average is: 2.49944
  *
  */
 int main(int argc, char* argv[])
@@ -77,6 +79,9 @@ int main(int argc, char* argv[])
 	std::cout << "The rank average is: " << rank_av << "\n";
 	std::cout << "The suit average is: " << suit_av << "\n";
 
+
+	// Test of the less than operator<
+	Card c1(5,2);
 
 
 	return 0;
