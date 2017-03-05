@@ -2,4 +2,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 
 
-add_executable(adrien adrien.cpp Card.cpp)
+add_executable(test_Card test_Card.cpp Card.cpp)
