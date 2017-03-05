@@ -9,6 +9,7 @@
 #include "Card.hpp"
 #include <stdlib.h>
 #include <time.h>
+#include "Error.hpp"
 
 
 
@@ -21,6 +22,22 @@ Card::Card()
 }
 
 
+
+// Constructor that initializes an card with the provided rank and suit
+Card::Card(const int rank, const int suit)
+{
+	if ((rank < 1) || (rank > 13))
+	{
+		throw ErrorRank();
+	}
+	mrank=rank;
+
+	if ((suit < 1) || (suit > 4))
+	{
+		throw ErrorSuit();
+	}
+	msuit=suit;
+}
 
 // Constructor that initializes a card using a random generator and takes as input a
 // list of forbidden cards.
@@ -65,6 +82,10 @@ int Card::GetSuit() const
 
 void Card::SetRank(const int& new_rank)
 {
+	if ((new_rank < 1) || (new_rank > 13))
+	{
+		throw ErrorRank();
+	}
 	mrank=new_rank;
 }
 
@@ -72,6 +93,10 @@ void Card::SetRank(const int& new_rank)
 
 void Card::SetSuit(const int& new_suit)
 {
+	if ((new_suit < 1) || (new_suit > 4))
+	{
+		throw ErrorSuit();
+	}
 	msuit=new_suit;
 }
 

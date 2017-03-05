@@ -23,17 +23,32 @@ int main(int argc, char* argv[])
 
 	std::set<Card> forb;
 
-	Card card1;
-	Card card2;
+	Card random_card1(forb);
 
-	int rank;
-	rank=card1.GetRank();
+	Card random_card2;
+	random_card2.PullRandom(forb);
 
-	card1.PullRandom(forb);
-	card2.PullRandom(forb);
+	try
+	{
+		Card card3(14,3);
+	}
+	catch(std::exception& e)
+	{
+		std::cout << e.what();
+	}
 
-	std::cout << "card1 is: " << card1 << "\n";
-	std::cout << "card2 is: " << card2 << "\n";
+	try
+	{
+		Card card4(8,0);
+	}
+	catch(std::exception& e)
+	{
+		std::cout << e.what();
+	}
+
+
+	std::cout << "random_card1 is: " << random_card1 << "\n";
+	std::cout << "random_card2 is: " << random_card2 << "\n";
 
 
 	return 0;

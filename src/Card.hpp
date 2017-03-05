@@ -42,6 +42,9 @@ public:
 	// Default constructor that initializes an empty card (0,0)
 	Card();
 
+	// Constructor that initializes an card with the provided rank and suit
+	Card(const int rank, const int suit);
+
 	// Constructor that initializes a card using a random generator and takes as input a
 	// list of forbidden cards.
 	Card(const std::set<Card>& forbidden_cards);
