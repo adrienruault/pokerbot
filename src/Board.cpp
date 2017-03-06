@@ -92,6 +92,8 @@ void Board::BackPreFlop(std::set<Card>& forbidden_cards)
 			mboard[i]=empty_card;
 		}
 	}
+
+	mround_state=1;
 }
 
 
