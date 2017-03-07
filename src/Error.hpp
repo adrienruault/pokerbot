@@ -22,7 +22,7 @@ private:
 public:
 	ErrorRank() throw()
 	{
-		mphrase="The rank assigned to the card is not allowed, out of the interval [1,13].\n";
+		mphrase="Error:\nThe rank assigned to the card is not allowed, out of the interval [1,13].\n";
 	}
 
 	virtual const char* what() const throw()
@@ -42,7 +42,7 @@ private:
 public:
 	ErrorSuit() throw()
 	{
-		mphrase="The suit assigned to the card is not allowed, out of the interval [1,4].\n";
+		mphrase="Error:\nThe suit assigned to the card is not allowed, out of the interval [1,4].\n";
 	}
 
 	virtual const char* what() const throw()
@@ -63,7 +63,7 @@ private:
 public:
 	ErrorBoardRound() throw()
 	{
-		mphrase="Trying to deal an unauthorized round. It is likely that the board is at the river state and that it is asked to go further.\n";
+		mphrase="Error:\nTrying to deal an unauthorized round.\nIt is likely that the board is at the river state and that it is asked to go further.\n";
 	}
 
 	virtual const char* what() const throw()
@@ -92,6 +92,27 @@ public:
 		return mphrase.c_str();
 	}
 	virtual ~ErrorUndefinedBoardState() throw()
+	{}
+
+};
+
+
+
+class ErrorWrongBoardIndex : public std::exception
+{
+private:
+	std::string mphrase;
+public:
+	ErrorWrongBoardIndex() throw()
+	{
+		mphrase="Trying to access an index of the mboard attribute of Board that is not allowed.\n";
+	}
+
+	virtual const char* what() const throw()
+	{
+		return mphrase.c_str();
+	}
+	virtual ~ErrorWrongBoardIndex() throw()
 	{}
 
 };

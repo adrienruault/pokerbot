@@ -40,8 +40,18 @@ Hand::Hand(std::set<Card>& forbidden_cards)
 	// Adding the last pulled card to the forbidden set of cards
 	forbidden_cards.insert(card2);
 
-	mhand.push_back(card1);
-	mhand.push_back(card2);
+	if (card1<card2)
+	{
+		mhand.push_back(card1);
+		mhand.push_back(card2);
+	}
+	else
+	{
+		mhand.push_back(card2);
+		mhand.push_back(card1);
+	}
+
+
 }
 
 
@@ -62,8 +72,18 @@ void Hand::PullRandom(std::set<Card>& forbidden_cards)
 	// Adding the last pulled card to the forbidden set of cards
 	forbidden_cards.insert(card2);
 
-	mhand[0]=card1;
-	mhand[1]=card2;
+
+
+	if (card1<card2)
+	{
+		mhand[0]=card1;
+		mhand[1]=card2;
+	}
+	else
+	{
+		mhand[0]=card2;
+		mhand[1]=card1;
+	}
 }
 
 

@@ -63,9 +63,17 @@ public:
 	// for the forbidden cards.
 	void PullRandom(const std::set<Card>& forbidden_cards);
 
-	// Overriding f the less than equal operator in order to make the std::set::find method
+	// Overriding of the assignment operator
+	Card& operator= (const Card& card_to_copy);
+
+	// Overriding of the less than equal operator in order to make the std::set::find method
 	// working
 	bool operator< (const Card& right_card) const;
+
+	// Overriding of the greater than equal operator> using the previous defined less
+	// than equal operator
+	bool operator> (const Card& right_card) const;
+
 
 	friend std::ostream& operator<< (std::ostream &out, const Card& card_to_print);
 

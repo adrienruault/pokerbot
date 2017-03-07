@@ -7,11 +7,7 @@
 
 
 
-
 #include "Board.hpp"
-
-
-
 
 
 // Default constructor that creates an empty board at the pre-flop state
@@ -45,6 +41,9 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 		mboard[2].PullRandom(forbidden_cards);
 		forbidden_cards.insert(mboard[2]);
 
+
+
+
 		mround_state+=1;
 	}
 
@@ -68,6 +67,25 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 	else
 	{
 		throw ErrorBoardRound();
+	}
+
+	// The key card is used as a relay for the following insertion sort
+	Card key;
+	// for-loop to reorder the cards in the right order, it is an insertion-sort
+	for(int i=1; i<=mround_state; i++)
+	{
+		int p=i-1;
+		key=mboard[i];
+
+		// Loop that find the index p where to exchange A[p] and A[i]
+		while ((p>=0) && (mboard[p] > key))
+		{
+			mboard[p+1]=mboard[p];
+			p=p-1;
+		}
+
+		mboard[p+1]=key;
+
 	}
 }
 

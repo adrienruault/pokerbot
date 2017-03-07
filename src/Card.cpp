@@ -138,10 +138,31 @@ void Card::PullRandom(const std::set<Card>& forbidden_cards)
 }
 
 
+
+// Overriding of the assignment operator
+Card& Card::operator= (const Card& card_to_copy)
+{
+	mrank=card_to_copy.mrank;
+	msuit=card_to_copy.msuit;
+	return *this;
+}
+
+
+
 // Overriding of the less than equal operator in order to make the std::set::find method
 // working
 bool Card::operator< (const Card& right_card) const
 {
+	// First step is to make the (0,0) cards as greater than any others
+	if (right_card.mrank==0)
+	{
+		return true;
+	}
+	if (mrank==0)
+	{
+		return false;
+	}
+
 	if (mrank > right_card.mrank)
 	{
 		return false;
@@ -161,8 +182,25 @@ bool Card::operator< (const Card& right_card) const
 			return true;
 		}
 	}
-
 }
+
+
+
+
+bool Card::operator> (const Card& right_card) const
+{
+	if ((*this) < right_card)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+
+
 
 
 
