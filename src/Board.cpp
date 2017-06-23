@@ -42,8 +42,6 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 		forbidden_cards.insert(mboard[2]);
 
 
-
-
 		mround_state+=1;
 	}
 
@@ -69,6 +67,9 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 		throw ErrorBoardRound();
 	}
 
+
+	//We used to sort the cards of board so that they are in increasing order but we don't do it anymore
+	/*
 	// The key card is used as a relay for the following insertion sort
 	Card key;
 	// for-loop to reorder the cards in the right order, it is an insertion-sort
@@ -87,6 +88,7 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 		mboard[p+1]=key;
 
 	}
+	*/
 }
 
 
@@ -94,7 +96,7 @@ void Board::NextRound(std::set<Card>& forbidden_cards)
 // Method that reinitializes the board by bringing it back to the
 // pre-flop state and by setting all the cards of the mboard vector
 // to empty cards
-void Board::BackPreFlop(std::set<Card>& forbidden_cards)
+void Board::BringBackToPreFlop(std::set<Card>& forbidden_cards)
 {
 	// First step is to erase the cards present on the board from the set
 	// of forbidden cards since those cards will be available again
@@ -102,6 +104,7 @@ void Board::BackPreFlop(std::set<Card>& forbidden_cards)
 
 	Card empty_card;
 
+	// Note that mround_state is ranges in [1,4]
 	if ((mround_state>=2) && (mround_state<=4))
 	{
 		for (int i=0; i<mround_state+1; i++)
@@ -113,6 +116,28 @@ void Board::BackPreFlop(std::set<Card>& forbidden_cards)
 
 	mround_state=1;
 }
+
+
+
+
+
+Card Board::GetCard(const int& index)
+{
+	return mboard[index];
+}
+
+
+
+
+
+
+std::vector<Card> Board::GetBoard() const
+{
+	return mboard;
+}
+
+
+
 
 
 

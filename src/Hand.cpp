@@ -22,6 +22,51 @@ Hand::Hand()
 
 
 
+
+
+
+Hand::Hand(const Card& card1, const Card& card2)
+{
+	if (card1<card2)
+	{
+		mhand.push_back(card1);
+		mhand.push_back(card2);
+	}
+	else
+	{
+		mhand.push_back(card2);
+		mhand.push_back(card1);
+	}
+}
+
+
+
+
+
+
+Hand::Hand(int rank_card1, int suit_card1, int rank_card2, int suit_card2)
+{
+	Card card1(rank_card1, suit_card1);
+	Card card2(rank_card2, suit_card2);
+	if (card1<card2)
+	{
+		mhand.push_back(card1);
+		mhand.push_back(card2);
+	}
+	else
+	{
+		mhand.push_back(card2);
+		mhand.push_back(card1);
+	}
+}
+
+
+
+
+
+
+
+
 // Constructor that initializes a hand with two cards pulled randomly. It accounts
 // for the list of forbidden cards provided as input.
 // Note that the set of forbidden cards is passed by reference and is modified
@@ -58,7 +103,7 @@ Hand::Hand(std::set<Card>& forbidden_cards)
 
 // Redistribute 2 new cards to the hand, accounting for the forbidden set of cards
 // that is provided as input.
-void Hand::PullRandom(std::set<Card>& forbidden_cards)
+void Hand::PullRandomHand(std::set<Card>& forbidden_cards)
 {
 	// Pulling the first card of the hand
 	Card card1(forbidden_cards);
@@ -85,6 +130,29 @@ void Hand::PullRandom(std::set<Card>& forbidden_cards)
 		mhand[1]=card1;
 	}
 }
+
+
+
+
+
+
+// Return the card with index 0 or 1
+Card Hand::GetCard(const int& index)
+{
+	if (index == 0 or index == 1)
+	{
+		return mhand[index];
+	}
+	else
+	{
+		throw ErrorWrongHandIndex();
+	}
+}
+
+
+
+
+
 
 
 // Print a hand of 2 cards using the following formalism:

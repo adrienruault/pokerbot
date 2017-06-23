@@ -9,7 +9,7 @@
 
 
 
-#include "Board.hpp"
+#include "../src/Board.hpp"
 
 
 
@@ -28,6 +28,10 @@ int main(int argc, char* argv[])
 
 	for (int i=0; i<4; i++)
 	{
+		if (i==3)
+		{
+			std::cout << "\nNow we are trying to go further than the river to challenge the code:\n";
+		}
 		try
 		{
 			board1.NextRound(forb);
@@ -40,15 +44,19 @@ int main(int argc, char* argv[])
 	}
 
 
-	std::cout << "\n\n\n\t Back to pre-flop\n\n\n";
+	std::cout << "\n\n\n\t Call of the BringBackToPreFlop method of Board\n\n\n";
 
 
-	board1.BackPreFlop(forb);
+	board1.BringBackToPreFlop(forb);
 
 	std::cout << board1 << "\n\n";
 
 	for (int i=0; i<4; i++)
 	{
+		if (i==3)
+		{
+			std::cout << "\nNow we are trying to go further than the river to challenge the code:\n";
+		}
 		try
 		{
 			board1.NextRound(forb);

@@ -40,9 +40,16 @@ class ErrorSuit : public std::exception
 private:
 	std::string mphrase;
 public:
-	ErrorSuit() throw()
+	ErrorSuit(const int& suit) throw()
 	{
-		mphrase="Error:\nThe suit assigned to the card is not allowed, out of the interval [1,4].\n";
+		std::string converted_suit;          // string which will contain the result
+		std::ostringstream convert;   // stream used for the conversion
+		convert << suit;      // insert the textual representation of 'Number' in the characters in the stream
+		converted_suit = convert.str(); // set 'Result' to the contents of the stream
+
+		mphrase="Error:\nThe suit assigned to the card is ";
+		mphrase+= converted_suit;
+		mphrase+= "\nThis is not allowed because out of the interval [0,4].\n";
 	}
 
 	virtual const char* what() const throw()
@@ -92,6 +99,28 @@ public:
 		return mphrase.c_str();
 	}
 	virtual ~ErrorUndefinedBoardState() throw()
+	{}
+
+};
+
+
+
+class ErrorWrongHandIndex : public std::exception
+{
+private:
+	std::string mphrase;
+public:
+	ErrorWrongHandIndex() throw()
+	{
+		mphrase="Wrong index used to access a Hand's Card.\n";
+		mphrase+="It must be either 0 or 1\n.";
+	}
+
+	virtual const char* what() const throw()
+	{
+		return mphrase.c_str();
+	}
+	virtual ~ErrorWrongHandIndex() throw()
 	{}
 
 };

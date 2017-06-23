@@ -9,7 +9,7 @@
 
 
 #include <iostream>
-#include "Card.hpp"
+#include "../src/Card.hpp"
 #include <stdlib.h>
 #include <time.h>
 
@@ -31,15 +31,11 @@ int main(int argc, char* argv[])
 	// Declaration of a seed for the generation of random numbers
 	srand(time(NULL));
 
-	std::set<Card> forb;
-
-	Card random_card1(forb);
-
-	Card random_card2;
-	random_card2.PullRandom(forb);
-
+	std::cout << "Checking that the Error.h works fine:\n";
 	try
 	{
+		std::cout << "Challenging with a card (14,3),\n";
+		std::cout << "a rank of 14 is supposed to not be allowed:\n";
 		Card card3(14,3);
 	}
 	catch(std::exception& e)
@@ -49,6 +45,7 @@ int main(int argc, char* argv[])
 
 	try
 	{
+		std::cout << "Challenging with a card (8,0),\na suit of 0 is not supposed to be allowed:\n";
 		Card card4(8,0);
 	}
 	catch(std::exception& e)
@@ -56,7 +53,23 @@ int main(int argc, char* argv[])
 		std::cout << e.what();
 	}
 
+	try
+	{
+		std::cout << "Challenging with a card (0,5),\n";
+		std::cout << "a rank of 0 and a suit of 5 are not supposed to be allowed:\n";
+		Card card4(0,5);
+	}
+	catch(std::exception& e)
+	{
+		std::cout << e.what();
+	}
 
+
+	std::set<Card> forbidden_cards;
+	Card random_card1(forbidden_cards);
+	Card random_card2;
+	random_card2.PullRandom(forbidden_cards);
+	std::cout << "\nTwo different random cards are pulled:\n";
 	std::cout << "random_card1 is: " << random_card1 << "\n";
 	std::cout << "random_card2 is: " << random_card2 << "\n";
 
@@ -66,18 +79,19 @@ int main(int argc, char* argv[])
 	// We pull 1e6 cards independently
 	int rank_sum=0;
 	int suit_sum=0;
-	int n_pull=1000000;
-	for(int i=0; i<n_pull; i++)
+	int nb_cards_pulled=1000000;
+	for(int i=0; i<nb_cards_pulled; i++)
 	{
-		Card card_exp(forb);
+		Card card_exp(forbidden_cards);
 		rank_sum+=card_exp.GetRank();
 		suit_sum+=card_exp.GetSuit();
 	}
-	double rank_av=(double)rank_sum / (double)n_pull;
-	double suit_av=(double)suit_sum / (double)n_pull;
+	double rank_av=(double)rank_sum / (double)nb_cards_pulled;
+	double suit_av=(double)suit_sum / (double)nb_cards_pulled;
 
-	std::cout << "The rank average is: " << rank_av << "\n";
-	std::cout << "The suit average is: " << suit_av << "\n";
+	std::cout << "\n" << nb_cards_pulled << " have been pulled:\n";
+	std::cout << "The rank average is supposed to be 7 and it is: " << rank_av << "\n";
+	std::cout << "The suit average is supposed to be 2.5 and it is: " << suit_av << "\n";
 
 
 	// Test of the less than operator<

@@ -39,12 +39,17 @@ public:
 	// Method that checks mround_state to know at what round is the game
 	// and then pull some random cards to the board.
 	// The number of cards pulled depends at what round is the game
+	// The set of forbidden cards is updated
 	void NextRound(std::set<Card>& forbidden_cards);
 
 	// Method that reinitializes the board by bringing it back to the
 	// pre-flop state and by setting all the cards of the mboard vector
 	// to empty cards
-	void BackPreFlop(std::set<Card>& forbidden_cards);
+	// The set of forbidden cards is updated
+	void BringBackToPreFlop(std::set<Card>& forbidden_cards);
+
+	Card GetCard(const int& index);
+	std::vector<Card> GetBoard() const;
 
 	friend std::ostream& operator<< (std::ostream& out, const Board& board_to_print);
 

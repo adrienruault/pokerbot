@@ -30,9 +30,9 @@ Card::Card(const int rank, const int suit)
 	}
 	mrank=rank;
 
-	if ((suit < 1) || (suit > 4))
+	if ((suit < 0) || (suit > 4))
 	{
-		throw ErrorSuit();
+		throw ErrorSuit(suit);
 	}
 	msuit=suit;
 }
@@ -95,9 +95,9 @@ void Card::SetRank(const int& new_rank)
 
 void Card::SetSuit(const int& new_suit)
 {
-	if ((new_suit < 1) || (new_suit > 4))
+	if ((new_suit < 0) || (new_suit > 4))
 	{
-		throw ErrorSuit();
+		throw ErrorSuit(new_suit);
 	}
 	msuit=new_suit;
 }

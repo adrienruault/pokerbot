@@ -7,7 +7,7 @@
 
 
 
-#include "Hand.hpp"
+#include "../src/Hand.hpp"
 
 
 int main(int argc, char* argv[])
@@ -24,10 +24,10 @@ int main(int argc, char* argv[])
 	std::cout << "Empty hand made of 2 empty cards:\n";
 	std::cout << H << "\n\n";
 
-	std::cout << "10 hands pulled in a row\n";
+	std::cout << "10 hands randomly pulled in a row\n";
 	for(int i=0; i<10; i++)
 	{
-		H.PullRandom(forb);
+		H.PullRandomHand(forb);
 		std::cout << H << "\n";
 	}
 
